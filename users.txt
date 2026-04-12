@@ -1,0 +1,49 @@
+users
+{
+  "user_id": "유저 id",
+  "email": "이메일",
+  "password": "암호화된 비밀번호",
+  "nickname": "닉네임",
+  "grade": "학년",
+  "major": "전공",
+  "student_number": "학번",
+  "created_at": "생성일",
+  "updated_at": "수정일"
+}
+posts
+{
+  "post_id": "게시글 id",
+  "board_type": "게시글 타입",
+  "grade": "학년",
+  "major": "전공",
+  "title": "게시글 제목",
+  "content": "게시글 내용",
+  "user_id": "유저 id",
+  "created_at": "게시글 생성일",
+  "updated_at": "게시글 수정일"
+}
+comments
+{
+  "comment_id": "댓글 id",
+  "post_id": "게시글 id",
+  "user_id": "유저 id",
+  "content": "댓글 내용",
+  "created_at": "댓글 생성일",
+  "updated_at": "댓글 수정일"
+}
+notices
+{
+  "notice_id": "공지 id",
+  "title": "공지 제목",
+  "content": "공지 내용",
+  "category": "공지 분류",
+  "source_url": "원문 링크",
+  "created_at": "공지 생성일",
+  "updated_at": "공지 수정일"
+}
+post_likes
+{
+  "like_id": "좋아요 id",
+  "post_id": "게시글 id",
+  "user_id": "유저 id" 
+}
