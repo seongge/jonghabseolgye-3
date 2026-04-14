@@ -20,7 +20,8 @@ posts
   "content": "게시글 내용",
   "user_id": "유저 id",
   "created_at": "게시글 생성일",
-  "updated_at": "게시글 수정일"
+  "updated_at": "게시글 수정일",
+  "likes": "좋아요 갯수"
 }
 comments
 {
@@ -45,5 +46,6 @@ post_likes
 {
   "like_id": "좋아요 id",
   "post_id": "게시글 id",
+  "comment_id": "댓글 id",
   "user_id": "유저 id" 
 }
