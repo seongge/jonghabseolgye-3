@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const register = async (req, res) => {
@@ -61,6 +62,70 @@ const register = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "이메일과 비밀번호를 입력해주세요."
+      });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "이메일 또는 비밀번호가 올바르지 않습니다."
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "이메일 또는 비밀번호가 올바르지 않습니다."
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        user_id: user._id,
+        email: user.email,
+        nickname: user.nickname,
+        role: user.role,
+        major: user.major,
+        grade: user.grade
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "로그인 성공",
+      token,
+      data: {
+        id: user._id,
+        email: user.email,
+        nickname: user.nickname,
+        grade: user.grade,
+        major: user.major,
+        student_number: user.student_number,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "로그인 중 오류가 발생했습니다.",
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
-  register
+  register,
+  login
 };
