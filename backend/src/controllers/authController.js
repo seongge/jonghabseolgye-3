@@ -125,7 +125,33 @@ const login = async (req, res) => {
   }
 };
 
+const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.user_id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "사용자를 찾을 수 없습니다."
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "내 정보 조회 성공",
+      data: user
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "내 정보 조회 중 오류가 발생했습니다.",
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   register,
-  login
+  login,
+  getMe
 };
