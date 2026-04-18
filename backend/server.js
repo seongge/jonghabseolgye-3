@@ -6,12 +6,13 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-  await connectDB();
-
-  app.listen(PORT, () => {
-    console.log(`서버 실행 중: http://localhost:${PORT}`);
+connectDB()
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("DB connection failed:", error);
   });
-};
-
-startServer();
