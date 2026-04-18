@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Post = require("../models/Post");
 
 // 게시글 작성
@@ -106,7 +107,170 @@ const getPosts = async (req, res) => {
   }
 };
 
+// 게시글 상세 조회
+const getPostById = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({
+        success: false,
+        message: "유효하지 않은 게시글 ID입니다."
+      });
+    }
+
+    const post = await Post.findById(postId).populate(
+      "user_id",
+      "nickname major grade"
+    );
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "게시글을 찾을 수 없습니다."
+      });
+    }
+
+    // 전공 게시판 글은 같은 전공 사용자만 조회 가능
+    if (post.board_type === "major" && post.target_major !== req.user.major) {
+      return res.status(403).json({
+        success: false,
+        message: "해당 전공 게시판 글을 조회할 권한이 없습니다."
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "게시글 상세 조회 성공",
+      data: post
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "게시글 상세 조회 중 오류가 발생했습니다.",
+      error: error.message
+    });
+  }
+};
+
+// 게시글 수정
+const updatePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const { title, content, grade_filter } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({
+        success: false,
+        message: "유효하지 않은 게시글 ID입니다."
+      });
+    }
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "게시글을 찾을 수 없습니다."
+      });
+    }
+
+    // 작성자 본인만 수정 가능
+    if (post.user_id.toString() !== req.user.user_id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "본인이 작성한 게시글만 수정할 수 있습니다."
+      });
+    }
+
+    if (title !== undefined) {
+      post.title = title;
+    }
+
+    if (content !== undefined) {
+      post.content = content;
+    }
+
+    if (grade_filter !== undefined) {
+      if (!Array.isArray(grade_filter) || grade_filter.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "grade_filter는 비어 있지 않은 배열이어야 합니다."
+        });
+      }
+
+      post.grade_filter = grade_filter;
+    }
+
+    await post.save();
+
+    const updatedPost = await Post.findById(postId).populate(
+      "user_id",
+      "nickname major grade"
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "게시글이 성공적으로 수정되었습니다.",
+      data: updatedPost
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "게시글 수정 중 오류가 발생했습니다.",
+      error: error.message
+    });
+  }
+};
+
+// 게시글 삭제
+const deletePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({
+        success: false,
+        message: "유효하지 않은 게시글 ID입니다."
+      });
+    }
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "게시글을 찾을 수 없습니다."
+      });
+    }
+
+    // 작성자 본인만 삭제 가능
+    if (post.user_id.toString() !== req.user.user_id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "본인이 작성한 게시글만 삭제할 수 있습니다."
+      });
+    }
+
+    await Post.findByIdAndDelete(postId);
+
+    return res.status(200).json({
+      success: true,
+      message: "게시글이 성공적으로 삭제되었습니다."
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "게시글 삭제 중 오류가 발생했습니다.",
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createPost,
-  getPosts
+  getPosts,
+  getPostById,
+  updatePost,
+  deletePost
 };
