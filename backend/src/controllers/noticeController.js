@@ -4,7 +4,7 @@ const Notice = require("../models/Notice");
 // 학교 공지 목록 조회
 const getSchoolNotices = async (req, res) => {
   try {
-    const { category, keyword } = req.query;
+    const { category, keyword, page = 1, limit = 20 } = req.query;
 
     const filter = {
       notice_scope: "school",
@@ -21,11 +21,18 @@ const getSchoolNotices = async (req, res) => {
       ];
     }
 
-    const notices = await Notice.find(filter).sort({ published_at: -1 });
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const notices = await Notice.find(filter)
+      .sort({ published_at: -1 })
+      .skip(skip)
+      .limit(Number(limit));
 
     return res.status(200).json({
       success: true,
       message: "학교 공지 목록 조회 성공",
+      page: Number(page),
+      limit: Number(limit),
       count: notices.length,
       data: notices,
     });
@@ -41,7 +48,7 @@ const getSchoolNotices = async (req, res) => {
 // 내 학과 공지 목록 조회
 const getDepartmentNotices = async (req, res) => {
   try {
-    const { category, keyword } = req.query;
+    const { category, keyword, page = 1, limit = 20 } = req.query;
 
     if (!req.user.major) {
       return res.status(400).json({
@@ -66,12 +73,19 @@ const getDepartmentNotices = async (req, res) => {
       ];
     }
 
-    const notices = await Notice.find(filter).sort({ published_at: -1 });
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const notices = await Notice.find(filter)
+      .sort({ published_at: -1 })
+      .skip(skip)
+      .limit(Number(limit));
 
     return res.status(200).json({
       success: true,
       message: "학과 공지 목록 조회 성공",
       department: req.user.major,
+      page: Number(page),
+      limit: Number(limit),
       count: notices.length,
       data: notices,
     });

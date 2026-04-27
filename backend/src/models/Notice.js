@@ -47,4 +47,16 @@ const noticeSchema = new mongoose.Schema(
 
 noticeSchema.index({ source_url: 1 }, { unique: true });
 
+// 공지 목록 정렬 최적화
+noticeSchema.index({ notice_scope: 1, published_at: -1 });
+
+// 학과 공지 정렬 최적화
+noticeSchema.index({ notice_scope: 1, department: 1, published_at: -1 });
+
+// 카테고리 필터 최적화
+noticeSchema.index({ category: 1 });
+
+// 검색 최적화
+noticeSchema.index({ title: "text", content: "text" });
+
 module.exports = mongoose.model("Notice", noticeSchema);
