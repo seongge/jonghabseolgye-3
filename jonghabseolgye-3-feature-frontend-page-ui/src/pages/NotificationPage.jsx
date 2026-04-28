@@ -2,6 +2,7 @@ import React from 'react';
 import { IoIosArrowBack, IoMdNotifications } from 'react-icons/io';
 
 export default function NotificationPage({ setPage, notifications, setNotifications, posts, setSelectedPost }) {
+
   const handleItemClick = (notif) => {
     const updatedNotifications = notifications.map(n =>
       n.id === notif.id ? { ...n, isRead: true } : n
@@ -36,11 +37,12 @@ export default function NotificationPage({ setPage, notifications, setNotificati
               style={{
                 ...notiCardStyle,
                 backgroundColor: n.isRead ? '#fff' : '#f0f7ff',
-                opacity: n.isRead ? 0.7 : 1
+                opacity: n.isRead ? 0.7 : 1,
+                border: n.isRead ? '1px solid #eee' : '1px solid #d0e7ff'
               }}
             >
               <div style={notiIconCircleStyle}>
-                <IoMdNotifications style={{ color: '#003366' }} />
+                <IoMdNotifications style={{ color: n.isRead ? '#adb5bd' : '#003366' }} />
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#333' }}>{n.title}</div>

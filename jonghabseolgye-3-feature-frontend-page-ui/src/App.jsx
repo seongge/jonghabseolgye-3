@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
@@ -19,13 +19,47 @@ function App() {
     { id: 1, title: '쪽지가 도착했습니다.', content: '과제 같이 하실래요?', isRead: false, targetPostId: 3 },
   ]);
 
+  const addNotification = (title, content, targetPostId) => {
+    const newNoti = {
+      id: Date.now(),
+      title,
+      content,
+      isRead: false,
+      targetPostId
+    };
+    setNotifications(prev => [newNoti, ...prev]);
+    showToast('새로운 알림이 도착했습니다!');
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      addNotification('학교 공지 업데이트', '새로운 수강신청 관련 공지가 등록되었습니다.', 2);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const savedLoginStatus = localStorage.getItem('isLoggedIn');
+    if (savedLoginStatus === 'true') {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userStudentId');
+    setPage('main');
+    showToast('로그아웃 되었습니다.');
+  };
+
   const [posts, setPosts] = useState([
     {
       id: 1,
       category: '자유 게시판',
       title: '오늘 점심 돈까스 어때요?',
       content: '학식 돈까스 진짜 맛있어 보이던데 같이 먹을 사람?',
-      author: '익명',
+      author: '익명(나)',
       likes: 12,
       isLiked: false,
       date: '10분 전',
@@ -67,9 +101,10 @@ function App() {
           displayPosts = posts.filter(p => p.category === boardCategory);
         }
         return <BoardPage setPage={setPage} category={boardCategory} posts={displayPosts} setSelectedPost={setSelectedPost} setBoardCategory={setBoardCategory} isLoggedIn={isLoggedIn} showToast={showToast} />;
-      case 'postDetail': return <PostDetailPage setPage={setPage} post={selectedPost} setPosts={setPosts} posts={posts} setSelectedPost={setSelectedPost} isLoggedIn={isLoggedIn} showToast={showToast} />;
+      case 'postDetail':
+        return <PostDetailPage setPage={setPage} post={selectedPost} setPosts={setPosts} posts={posts} setSelectedPost={setSelectedPost} isLoggedIn={isLoggedIn} showToast={showToast} addNotification={addNotification} />;
       case 'write': return <WritePage setPage={setPage} setPosts={setPosts} category={boardCategory} />;
-      case 'profile': return <ProfilePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setPage={setPage} posts={posts} setBoardCategory={setBoardCategory} showToast={showToast} />;
+      case 'profile': return <ProfilePage isLoggedIn={isLoggedIn} setIsLoggedIn={handleLogout} setPage={setPage} posts={posts} setBoardCategory={setBoardCategory} showToast={showToast} />;
       case 'notifications': return <NotificationPage setPage={setPage} notifications={notifications} setNotifications={setNotifications} posts={posts} setSelectedPost={setSelectedPost} />;
       default: return <MainPage setPage={setPage} setBoardCategory={setBoardCategory} unreadCount={notifications.filter(n => !n.isRead).length} posts={posts} isLoggedIn={isLoggedIn} showToast={showToast} setSelectedPost={setSelectedPost} />;
     }

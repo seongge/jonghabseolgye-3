@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IoIosArrowBack, IoMdHeart, IoIosHeartEmpty, IoMdSend, IoMdMore, IoMdThumbsUp, IoIosThumbsUp } from 'react-icons/io';
 
-export default function PostDetailPage({ setPage, post, setPosts, posts, setSelectedPost, isLoggedIn, showToast }) {
+export default function PostDetailPage({ setPage, post, setPosts, posts, setSelectedPost, isLoggedIn, showToast, addNotification }) {
   const [commentInput, setCommentInput] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -62,11 +62,18 @@ export default function PostDetailPage({ setPage, post, setPosts, posts, setSele
       return;
     }
     if (!commentInput.trim()) return;
+
     const newComment = { id: Date.now(), author: '익명(나)', content: commentInput, likes: 0, isLiked: false, date: '방금 전' };
     const updatedComments = [...(post.comments || []), newComment];
     const updatedPosts = posts.map(p => p.id === post.id ? { ...p, comments: updatedComments } : p);
+
     setPosts(updatedPosts);
     setSelectedPost({ ...post, comments: updatedComments });
+
+    if (post.author === '익명(나)') {
+      addNotification('새 댓글 알림', `내 게시글 "${post.title}"에 새로운 댓글이 달렸습니다.`, post.id);
+    }
+
     setCommentInput('');
     showToast('댓글이 작성되었습니다.');
   };
