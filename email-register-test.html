@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>이메일 인증 회원가입 테스트</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    input, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin: 6px 0;
+    }
+    button {
+      cursor: pointer;
+    }
+    pre {
+      white-space: pre-wrap;
+      background: #f5f5f5;
+      padding: 12px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>이메일 인증 회원가입 테스트</h2>
+
+  <h3>1. 인증번호 발송</h3>
+  <input id="email" placeholder="이메일" />
+  <button onclick="sendCode()">인증번호 발송</button>
+
+  <h3>2. 회원가입 완료</h3>
+  <input id="password" placeholder="비밀번호" type="password" />
+  <input id="nickname" placeholder="닉네임" />
+  <input id="grade" placeholder="학년: 1~4" type="number" />
+  <input id="major" placeholder="전공" />
+  <input id="student_number" placeholder="학번" />
+  <input id="verificationCode" placeholder="메일로 받은 6자리 인증번호" />
+  <button onclick="register()">인증번호 확인 후 회원가입</button>
+
+  <h3>결과</h3>
+  <pre id="result"></pre>
+
+  <script>
+    const API_BASE_URL = "http://localhost:5000";
+
+    const showResult = (title, status, data) => {
+      document.getElementById("result").textContent =
+        title + "\nHTTP 상태코드: " + status + "\n\n" + JSON.stringify(data, null, 2);
+    };
+
+    const readJson = async (res) => {
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch (error) {
+        return text;
+      }
+    };
+
+    async function sendCode() {
+      try {
+        const email = document.getElementById("email").value;
+
+        const res = await fetch(API_BASE_URL + "/api/auth/register/send-code", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await readJson(res);
+        showResult("인증번호 발송 결과", res.status, data);
+      } catch (error) {
+        document.getElementById("result").textContent = "요청 실패\n\n" + error.message;
+      }
+    }
+
+    async function register() {
+      try {
+        const body = {
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          nickname: document.getElementById("nickname").value,
+          grade: Number(document.getElementById("grade").value),
+          major: document.getElementById("major").value,
+          student_number: document.getElementById("student_number").value,
+          verificationCode: document.getElementById("verificationCode").value
+        };
+
+        const res = await fetch(API_BASE_URL + "/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+        });
+
+        const data = await readJson(res);
+        showResult("회원가입 결과", res.status, data);
+      } catch (error) {
+        document.getElementById("result").textContent = "요청 실패\n\n" + error.message;
+      }
+    }
+  </script>
+</body>
+</html>

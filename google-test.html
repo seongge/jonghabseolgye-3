@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Google Login Test</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h2>Google 로그인 테스트</h2>
+
+  <div id="g_id_onload"
+       data-client_id="45780928168-4sv0of2iugpk3quiki0o4ue7c773u250.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse">
+  </div>
+
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="signin_with"
+       data-shape="rectangular"
+       data-logo_alignment="left">
+  </div>
+
+  <h3>결과</h3>
+  <pre id="result"></pre>
+
+  <script>
+    async function handleCredentialResponse(response) {
+      const resultBox = document.getElementById("result");
+
+      try {
+        const idToken = response.credential;
+
+        resultBox.textContent =
+          "Google ID Token 받음. 백엔드로 전송 중...\n\n" +
+          "토큰 앞부분: " + idToken.substring(0, 40) + "...";
+
+        const res = await fetch("http://localhost:5000/api/auth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            idToken: idToken
+          })
+        });
+
+        const text = await res.text();
+
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          data = text;
+        }
+
+        resultBox.textContent =
+          "HTTP 상태코드: " + res.status + "\n\n" +
+          JSON.stringify(data, null, 2);
+
+      } catch (error) {
+        resultBox.textContent =
+          "요청 실패\n\n" +
+          error.message +
+          "\n\n브라우저 개발자도구 Console / Network 탭도 확인하세요.";
+      }
+    }
+  </script>
+</body>
+</html>
