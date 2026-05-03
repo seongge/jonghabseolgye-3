@@ -116,7 +116,8 @@
 ---
 
 ### 📌 ERD
-👉 사진첨부
+
+<img width="861" height="1068" alt="Image" src="https://github.com/user-attachments/assets/068dc9fd-96df-4587-a77d-27f4df0441c4" />
 
 ---
 
