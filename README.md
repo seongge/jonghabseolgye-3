@@ -106,7 +106,7 @@
 - 크롤링 모듈
 - REST API 통신 구조
 
-👉 사진첨부
+<img width="1200" height="911" alt="Image" src="https://github.com/user-attachments/assets/d78c53da-b9ae-46cf-a2fe-4a07f756d4d0" />
 
 ---
 
@@ -269,7 +269,59 @@
 - 알림 UI 구현
 - 검색 및 필터 구현
 
-👉 사진첨부
+<table>
+  <tr>
+<td colspan="3" align="center"><b>게시판 UI 구현</b></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/75dd23d7-8e1f-440c-a3b1-69451905969e" width="400" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/56f80239-ebe0-40e5-95e0-1e18734a7c74" width="400" />
+    </td>
+<td>
+      <img src="https://github.com/user-attachments/assets/0aaba724-87c8-4adc-a24a-d344f25591c6" width="400" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><b>공지 화면 구현</b></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/7e461815-0bfb-483d-b92d-e56231176077" width="400" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/60e3e486-5fce-49dc-bbc4-70448c50aacf" width="400" />
+    </td>
+<td>
+      <img src="https://github.com/user-attachments/assets/a6dab1de-7d72-4f7f-aaca-d47e6878dffa" width="400" />
+    </td>
+  </tr>
+<tr>
+    <td colspan="3" align="center"><b>알림 UI 구현</b></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/bd4fb72a-d053-4d2c-9b2c-f611a8e1b42d" width="400" />
+    </td>
+<tr>
+    <td colspan="3" align="center"><b>검색 및 필터 구현</b></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/f45fbf06-f92b-427a-84f3-e3cb3f646023" width="400" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/c7879c86-f674-4915-a8bd-6e6e7619da61" width="400" />
+    </td>
+<td>
+      <img src="https://github.com/user-attachments/assets/767ef9be-f5c3-484d-8030-505fca04684a" width="400" />
+    </td>
+  </tr>
+</table>
+
+
 
 ---
 
