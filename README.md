@@ -305,6 +305,9 @@
     <td>
       <img src="https://github.com/user-attachments/assets/bd4fb72a-d053-4d2c-9b2c-f611a8e1b42d" width="400" />
     </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/6c1f666d-9371-43e0-97eb-d63dc9f92e92" width="400" />
+    </td>
 <tr>
     <td colspan="3" align="center"><b>검색 및 필터 구현</b></td>
   </tr>
