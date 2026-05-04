@@ -122,7 +122,7 @@
 ---
 
 ### 📌 API 구조
-<img width="1735" height="905" alt="image" src="https://github.com/user-attachments/assets/b5e67178-c4e0-4e7a-98d8-6dcb99619dc1" />
+<img width="1700" height="863" alt="image" src="https://github.com/user-attachments/assets/dc24bca6-048c-4d18-a809-4f0df599c009" />
 
 ---
 
