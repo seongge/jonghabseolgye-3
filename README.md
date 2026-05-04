@@ -111,7 +111,7 @@
 ---
 
 ### 📌 유스케이스 다이어그램
-👉 사진첨부
+<img width="746" height="555" alt="종설 유스케이스" src="https://github.com/user-attachments/assets/76690401-9738-42f5-8a8f-0b5ce2bf0daa" />
 
 ---
 
