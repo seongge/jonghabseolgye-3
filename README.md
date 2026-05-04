@@ -1,4 +1,4 @@
-# 📢 실시간 학과 공지 및 소통 플랫폼
+## 📢 실시간 학과 공지 및 소통 플랫폼
 
 ---
 
@@ -122,7 +122,7 @@
 ---
 
 ### 📌 API 구조
-👉 사진첨부
+<img width="1735" height="905" alt="image" src="https://github.com/user-attachments/assets/b5e67178-c4e0-4e7a-98d8-6dcb99619dc1" />
 
 ---
 
@@ -270,60 +270,70 @@
 - 검색 및 필터 구현
 
 <table>
+  <!-- 1. 게시판 UI -->
   <tr>
-<td colspan="3" align="center"><b>게시판 UI 구현</b></td>
+    <td colspan="3" align="center"><b>게시판 UI 구현</b></td>
   </tr>
   <tr>
     <td>
-      <img src="https://github.com/user-attachments/assets/75dd23d7-8e1f-440c-a3b1-69451905969e" width="400" />
+      <img src="https://github.com/user-attachments/assets/75dd23d7-8e1f-440c-a3b1-69451905969e" width="300" height="650" />
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/56f80239-ebe0-40e5-95e0-1e18734a7c74" width="400" />
+      <img src="https://github.com/user-attachments/assets/56f80239-ebe0-40e5-95e0-1e18734a7c74" width="300" height="650" />
     </td>
-<td>
-      <img src="https://github.com/user-attachments/assets/0aaba724-87c8-4adc-a24a-d344f25591c6" width="400" />
+    <td>
+      <img src="https://github.com/user-attachments/assets/0aaba724-87c8-4adc-a24a-d344f25591c6" width="300" height="650" />
     </td>
   </tr>
+
+  <!-- 2. 공지 화면 -->
   <tr>
     <td colspan="3" align="center"><b>공지 화면 구현</b></td>
   </tr>
   <tr>
     <td>
-      <img src="https://github.com/user-attachments/assets/7e461815-0bfb-483d-b92d-e56231176077" width="400" />
+      <img src="https://github.com/user-attachments/assets/7e461815-0bfb-483d-b92d-e56231176077" width="300" height="650" />
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/60e3e486-5fce-49dc-bbc4-70448c50aacf" width="400" />
+      <img src="https://github.com/user-attachments/assets/60e3e486-5fce-49dc-bbc4-70448c50aacf" width="300" height="650" />
     </td>
-<td>
-      <img src="https://github.com/user-attachments/assets/a6dab1de-7d72-4f7f-aaca-d47e6878dffa" width="400" />
+    <td>
+      <img src="https://github.com/user-attachments/assets/a6dab1de-7d72-4f7f-aaca-d47e6878dffa" width="300" height="650" />
     </td>
   </tr>
-<tr>
+
+  <!-- 3. 알림 UI -->
+  <tr>
     <td colspan="3" align="center"><b>알림 UI 구현</b></td>
   </tr>
   <tr>
     <td>
-      <img src="https://github.com/user-attachments/assets/bd4fb72a-d053-4d2c-9b2c-f611a8e1b42d" width="400" />
+      <img src="https://github.com/user-attachments/assets/bd4fb72a-d053-4d2c-9b2c-f611a8e1b42d" width="300" height="650" />
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/6c1f666d-9371-43e0-97eb-d63dc9f92e92" width="400" />
+      <img src="https://github.com/user-attachments/assets/6c1f666d-9371-43e0-97eb-d63dc9f92e92" width="300" height="650" />
     </td>
-<tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/e6e6354a-5a21-4941-a72f-ff60aa987246" width="300" height="650" />
+    </td>
+  </tr>
+
+  <!-- 4. 검색 및 필터  -->
+  <tr>
     <td colspan="3" align="center"><b>검색 및 필터 구현</b></td>
   </tr>
   <tr>
     <td>
-      <img src="https://github.com/user-attachments/assets/f45fbf06-f92b-427a-84f3-e3cb3f646023" width="400" />
+      <img src="https://github.com/user-attachments/assets/f45fbf06-f92b-427a-84f3-e3cb3f646023" width="300" height="650" />
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/c7879c86-f674-4915-a8bd-6e6e7619da61" width="400" />
+      <img src="https://github.com/user-attachments/assets/c7879c86-f674-4915-a8bd-6e6e7619da61" width="300" height="650" />
     </td>
-<td>
-      <img src="https://github.com/user-attachments/assets/767ef9be-f5c3-484d-8030-505fca04684a" width="400" />
+    <td>
+      <img src="https://github.com/user-attachments/assets/767ef9be-f5c3-484d-8030-505fca04684a" width="300" height="650" />
     </td>
   </tr>
 </table>
-
 
 
 ---
